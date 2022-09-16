@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { makeIdGenerator } from "./utils";
 import "./style.css";
 
-const TreeList = (props) => {
+const DropDownList = (props) => {
   const getId = new makeIdGenerator();
 
   const renderList = (list) => {
@@ -62,7 +62,7 @@ const TreeList = (props) => {
   return partnersList;
 };
 
-TreeList.prototype = {
+DropDownList.prototype = {
   list: PropTypes.array,
   listStyle: PropTypes.string,
   listItemStyle: PropTypes.string,
@@ -72,7 +72,7 @@ TreeList.prototype = {
   content: PropTypes.elementType.isRequired,
 };
 
-TreeList.defaultProps = {
+DropDownList.defaultProps = {
   list: [],
   listStyle: "",
   listItemStyle: "",
@@ -82,4 +82,4 @@ TreeList.defaultProps = {
   contentStyle: "",
 };
 
-export default TreeList;
+export default DropDownList;

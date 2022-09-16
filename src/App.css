@@ -20,3 +20,17 @@ body {
   justify-content: space-around;
   align-items: flex-start;
 }
+
+.app ul {
+  margin-left: 1.5rem;
+
+  list-style: none;
+}
+
+.tree-list__last-list-item {
+  color: red;
+}
+
+.skata-a {
+  font-size: 2rem;
+}
