@@ -69,3 +69,10 @@ body {
   width: 2.4rem;
   color: #424242;
 }
+
+.close-icon,
+.open-icon {
+  padding-right: 0.8rem;
+  width: 2.4rem;
+  color: #424242;
+}

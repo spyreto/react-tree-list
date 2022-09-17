@@ -12,12 +12,16 @@ export const setListKeys = (list) => {
   const getId = new makeIdGenerator();
 
   const traverse = (node) => {
-    console.log(node);
     node.key = `ddl-${getId()}`;
     if (node.children) {
-      return node.children.map((item) => traverse(item));
+      return {
+        children: node.children.map((item) => traverse(item)),
+        ...node,
+      };
     }
+    return node;
   };
+
   return list.map((item) => {
     item.key = `ddl-${() => getId()}`;
     return traverse(item);

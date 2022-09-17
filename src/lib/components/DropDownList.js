@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 //Dropdown icons
 import { FaArrowDown, FaArrowRight } from "react-icons/fa";
 
-import { makeIdGenerator } from "./utils";
+import { makeIdGenerator, setListKeys } from "./utils";
 
 const DropDownList = (props) => {
   const [listStatus, setListStatus] = useState({});
+
+  console.log(setListKeys(props.list));
 
   const getId = new makeIdGenerator();
 
@@ -19,7 +21,6 @@ const DropDownList = (props) => {
     newListStatus.hasOwnProperty(key)
       ? (newListStatus[key] = !listStatus[key])
       : (newListStatus[key] = true);
-
     setListStatus(newListStatus);
   };
 
@@ -27,20 +28,19 @@ const DropDownList = (props) => {
   const renderList = (list) => {
     const traverse = (node, level = 0) => {
       if (node.children) {
-        node.key = `ddl-${getId()}`;
         level++;
         return (
           <React.Fragment key={getId()}>
             <li className={props.innerListHeaderStyle} key={node.key}>
               {/* Renders the appropriate arrow icon */}
               {listStatus[node.key] ? (
-                <props.openIcon
-                  className="drop-down-list__open-arrow"
+                <props.closeIcon
+                  className={props.iconOpenStyle}
                   onClick={() => handleOnClick(node.key)}
                 />
               ) : (
-                <props.closeIcon
-                  className="drop-down-list__close-arrow"
+                <props.openIcon
+                  className={props.iconCloseStyle}
                   onClick={() => handleOnClick(node.key)}
                 />
               )}
@@ -85,9 +85,9 @@ const DropDownList = (props) => {
     );
   };
 
-  const partnersList = renderList(props.list);
+  const list = renderList(setListKeys(props.list));
 
-  return partnersList;
+  return list;
 };
 
 DropDownList.prototype = {
@@ -99,6 +99,8 @@ DropDownList.prototype = {
   firstItemStyle: PropTypes.string,
   listItemStyle: PropTypes.string,
   contentStyle: PropTypes.string,
+  iconOpenStyle: PropTypes.string,
+  iconCloseStyle: PropTypes.string,
   content: PropTypes.elementType.isRequired,
   openIcon: PropTypes.elementType,
   closeIcon: PropTypes.elementType,
@@ -113,8 +115,14 @@ DropDownList.defaultProps = {
   listItemStyle: "",
   lastListItemStyle: "",
   contentStyle: "",
-  openIcon: () => <FaArrowRight />,
-  closeIcon: () => <FaArrowRight />,
+  iconOpenStyle: "",
+  iconCloseStyle: "",
+  openIcon: (props) => (
+    <FaArrowRight className={props.className} onClick={props.onClick} />
+  ),
+  closeIcon: (props) => (
+    <FaArrowDown className={props.className} onClick={props.onClick} />
+  ),
 };
 
 export default DropDownList;

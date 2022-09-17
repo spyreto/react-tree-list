@@ -50,9 +50,9 @@ const TreeList = (props) => {
     );
   };
 
-  const partnersList = renderList(props.list);
+  const list = renderList(props.list);
 
-  return partnersList;
+  return list;
 };
 
 TreeList.prototype = {
