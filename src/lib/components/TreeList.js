@@ -2,56 +2,49 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { makeIdGenerator } from "./utils";
-import "./style.css";
 
 const TreeList = (props) => {
   const getId = new makeIdGenerator();
 
   const renderList = (list) => {
+    // Creates the DropDownList Component
     const traverse = (node, level = 0) => {
       if (node.children) {
+        level++;
         return (
           <React.Fragment key={getId()}>
-            <li
-              className={`tree-list__list-${level}-item ${props.listItemStyle}`}
-              key={getId()}
-            >
+            <li className={props.innerListHeaderStyle} key={getId()}>
               {props.content ? (
                 <props.content
-                  content={node.title}
+                  content={node.content}
                   key={getId()}
                   className={props.contentStyle}
                 />
               ) : (
-                node.title
+                node.content
               )}
             </li>
-            <ul
-              className={`tree-list__list-${++level} ${props.innerListStyle}`}
-              key={getId()}
-            >
+            <ul className={props.innerListStyle} key={getId()}>
               {node.children.map((i) => traverse(i, level))}
             </ul>
           </React.Fragment>
         );
       } else {
-        let lastItem =
-          level > 0
-            ? `tree-list__last-list-item ${props.lastListItemStyle}`
-            : "";
+        let firstItem = level > 0 ? props.listItemStyle : props.firstItemStyle;
         return (
-          <li className={`tree-list__list-${level} ${lastItem}`} key={getId()}>
+          <li className={firstItem} key={getId()}>
             {props.content ? (
-              <props.content content={node.title} key={getId()} />
+              <props.content content={node.content} key={getId()} />
             ) : (
-              node.title
+              node.content
             )}
           </li>
         );
       }
     };
+    // Main list
     return (
-      <ul className={`tree-list__list-0 ${props.listStyle}`} key={getId()}>
+      <ul className={props.className} key={getId()}>
         {list.map((item) => traverse(item))}
       </ul>
     );
@@ -64,20 +57,23 @@ const TreeList = (props) => {
 
 TreeList.prototype = {
   list: PropTypes.array,
-  listStyle: PropTypes.string,
-  listItemStyle: PropTypes.string,
+  className: PropTypes.string,
+  innerListHeaderStyle: PropTypes.string,
+  listItemHeaderStyle: PropTypes.string,
   innerListItemStyle: PropTypes.string,
-  lastListItemStyle: PropTypes.string,
+  firstItemStyle: PropTypes.string,
+  listItemStyle: PropTypes.string,
   contentStyle: PropTypes.string,
   content: PropTypes.elementType.isRequired,
 };
 
 TreeList.defaultProps = {
   list: [],
-  listStyle: "",
-  listItemStyle: "",
-  innerListStyle: "",
+  className: "",
+  innerListHeaderStyle: "",
+  listItemHeader: "",
   innerListItemStyle: "",
+  listItemStyle: "",
   lastListItemStyle: "",
   contentStyle: "",
 };
