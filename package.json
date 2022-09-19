@@ -6,7 +6,9 @@
     "react",
     "nested list",
     "dropdown list",
-    "tre-view-list"
+    "tree-view-list",
+    "react dropdown list",
+    "react tree view list"
   ],
   "version": "1.0.0",
   "private": false,

@@ -113,8 +113,6 @@ const toDoList = [
 
 <img src="./readme/dropdown-list.gif" width="300" height="400"/>
 
-&nbsp;
-
 ### Example usage
 
 #### React 
