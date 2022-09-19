@@ -1,70 +1,386 @@
-# Getting Started with Create React App
+<div id="top"></div>
+<!-- React Tree List -->
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Issues][issues-shield]][issues-url]
+[![Apache-2.0 License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-## Available Scripts
+<!-- PROJECT -->
+<div align="center">
+  <h3 align="center">React Tree List</h3>
+  <p align="center">  
+    <a href="https://github.com/spyreto/react-tree-list/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/spyreto/react-tree-list/issues">Request Feature</a>
+  </p>
+</div>
 
-In the project directory, you can run:
+# React Tree List
 
-### `npm start`
+<details>
+    <summary>Table of Contents</summary>
+    
+  - [1. Overview](#1-overview)
+  - [2. Installation](#2-installation)
+  - [3. List format](#3-list-format)
+  - [3. `<DropDown/>`](#3-dropdown)
+    - [Example usage](#example-usage)
+      - [React](#react)
+      - [CSS file](#css-file)
+    - [Props description](#props-description)
+  - [4. `<TreeList/>`](#4-treelist)
+    - [Example usage](#example-usage-1)
+      - [React](#react-1)
+      - [CSS file](#css-file-1)
+    - [Props description](#props-description-1)
+  - [5. Contributing](#5-contributing)
+  - [6. License](#6-license)
+  - [7. Contact](#7-contact)
+  
+ </details> 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ &nbsp;
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 1. Overview
 
-### `npm test`
+Display hierarchical data in React in two ways dropdown list or tree grid view list. Has been developed in such a way as to give to the user freedom in styling the components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- GETTING STARTED -->
+## 2. Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+yarn add @spyreto/react-tree-list
+# or
+npm install @spyreto/react-tree-list
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## 3. List format
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```js
+const toDoList = [
+  {
+    content: "Today:",
+    children: [
+      {
+        content: "Cooking:",
+        children: [
+          {
+            content: "Go to the grocery store:",
+            children: [
+              {
+                content: "Buy tomatoes"
+              },
+              {
+                content: "Buy potatoes"
+              }
+            ],
+          }
+        ],
+      }
+    ]
+  },
+  {
+    content: "Tomorrow",
+    children: [
+      {
+        content: "Go to work",
+      },
+      {
+        content: "Go to the gym",
+      },
+      {
+        content: "Send the presentation to Homer",
+      },
+    ],
+  },
+  .
+  .
+  .
+];
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 4. `<DropDown/>`
+&nbsp;
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img src="./readme/dropdown-list.gif" width="300" height="400"/>
 
-### Code Splitting
+&nbsp;
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Example usage
 
-### Analyzing the Bundle Size
+#### React 
+```jsx
+import React from "react";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+import { DropDownList } from "@spyreto/react-tree-list";
+import "./App.css";
 
-### Making a Progressive Web App
+import data from "./data";
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+function App() {
+  return (
+    <div className="app">
+      <div className="drop-down-list-container">
+        <h1 className="header">My ToDo List</h1>
+        <DropDownList
+          className="drop-down-list"
+          innerListClass="inner-list"
+          innerListHeaderClass="inner-list-header"
+          firstItemClass="first-item"
+          listItemClass="list-item"
+          list={data}
+          iconOpenClass="open-icon"
+          iconCloseClass="close-icon"
+        />
+      </div>
+    </div>
+  );
+}
+```
+&nbsp;
 
-### Advanced Configuration
+#### CSS file
+```css 
+.drop-down-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2.4rem;
+  border: 0.2rem solid #c7c7c7;
+  border-radius: 1.2rem;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+.header {
+  align-self: center;
+  margin-top: 3.6rem;
+  font-size: 3.6rem;
+  color: black;
+  font-weight: 600;
+}
 
-### Deployment
+.drop-down-list {
+  margin: 1.2rem 3.6rem;
+  list-style-type: none;
+  font-size: 1.6rem;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+.inner-list {
+  list-style-type: none;
+  margin-left: 2.4rem;
+}
+.first-item,
+.inner-list-header {
+  padding: 0.8rem 0;
+  font-weight: 600;
+}
 
-### `npm run build` fails to minify
+.first-item,
+.list-item {
+  padding: 0.8rem 0;
+}
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+.list-icon {
+  padding-right: 0.8rem;
+  width: 2.4rem;
+  color: #424242;
+}
+
+.close-icon,
+.open-icon {
+  padding-right: 0.8rem;
+  width: 2.4rem;
+  color: #424242;
+}
+
+```
+&nbsp;
+
+### Props description
+
+| Property             | Type        | Description                                                    | Default                     |
+| -------------------- | ----------- | -------------------------------------------------------------- | --------------------------- |
+| list                 | array       | List data                                                      | []                          |
+| className            | string      | Component class                                                | ""                          |
+| innerListHeaderClass | string      | Nested list headings class (```<li>``` )                       | ""                          |
+| innerListClass       | string      | Nested list  class (```<ul>``` )                               | ""                          |
+| firstItemClass       | string      | Main list items that do not have a nested list   (```<li>``` ) | ""                          |
+| listItemClass        | string      | List items class (```<li>``` )                                 | ""                          |
+| iconOpenClass        | string      | Class of the open list icon                                    | ""                          |
+| iconCloseClass       | string      | Class of the close list icon                                   | ""                          |
+| content              | elementType | Element in which to display the contents of the list           | ```<li> "content" <li/> ``` |
+| openIcon             | elementType | Open nested list icon                                          | ```<FaArrowRight/> ```      |
+| closeIcon            | elementType | Close nested list icon                                         | ```<FaArrowDown/>```        |
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+## 5. `<TreeList/>`
+
+&nbsp;
+
+<img src="./readme/tree-list.png" width="300" height="400"/>
+
+&nbsp;
+
+### Example usage
+
+&nbsp;
+
+#### React 
+```jsx
+import React from "react";
+import { DropDownList } from "@spyreto/react-tree-list";
+
+import { BsFillPencilFill } from "react-icons/bs";
+import "./App.css";
+
+import data from "./data";
+
+function App() {
+  const listIcon = (props) => {
+    return (
+      <React.Fragment>
+        <BsFillPencilFill />
+        <span>{props.content}</span>
+      </React.Fragment>
+    );
+  };
+
+  return (
+    <div className="app">
+      <div className="tree-list-container">
+        <h1 className="header">My ToDo List</h1>
+        <TreeList
+          className="tree-list"
+          innerListClass="inner-list"
+          innerListHeaderClass="inner-list-header"
+          firstItemClass="first-item"
+          listItemClass="list-item"
+          list={data}
+          content={listIcon}
+        />
+      </div>
+    </div>
+  );
+}
+```
+&nbsp;
+
+#### CSS file
+```css 
+.tree-list-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2.4rem;
+  border: 0.2rem solid #c7c7c7;
+  border-radius: 1.2rem;
+}
+
+.header {
+  align-self: center;
+  margin-top: 3.6rem;
+  font-size: 3.6rem;
+  color: black;
+  font-weight: 600;
+}
+
+.tree-list {
+  margin: 1.2rem 3.6rem;
+  list-style-type: none;
+  font-size: 1.6rem;
+}
+
+.inner-list {
+  list-style-type: none;
+  margin-left: 2.4rem;
+}
+.first-item,
+.inner-list-header {
+  padding: 0.8rem 0;
+  font-weight: 600;
+}
+
+.first-item,
+.list-item {
+  padding: 0.8rem 0;
+}
+
+.list-icon {
+  padding-right: 0.8rem;
+  width: 2.4rem;
+  color: #424242;
+}
+
+```
+&nbsp;
+
+### Props description
+
+| Property             | Type        | Description                                                    | Default                     |
+| -------------------- | ----------- | -------------------------------------------------------------- | --------------------------- |
+| list                 | array       | List data                                                      | []                          |
+| className            | string      | Component class                                                | ""                          |
+| innerListHeaderClass | string      | Nested list headings class (```<li>``` )                       | ""                          |
+| innerListClass       | string      | Nested list  class (```<ul>``` )                               | ""                          |
+| firstItemClass       | string      | Main list items that do not have a nested list   (```<li>``` ) | ""                          |
+| listItemClass        | string      | List items class (```<li>``` )                                 | ""                          |
+| content              | elementType | Element in which to display the contents of the list           | ```<li> "content" <li/> ``` |
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- CONTRIBUTING -->
+## 6. Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request.
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- LICENSE -->
+
+## 7. License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## 8. Contact
+
+Dimos - Spiridon Dimou - [Linkedin](https://www.linkedin.com/in/spiridon-dimou-2aa98216b) - spirosdimou22@gmail.com
+
+Project Link: [React Tree List](https://github.com/spyreto/react-tree-list)
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[issues-shield]: https://img.shields.io/github/issues/spyreto/react-tree-list?style=flat-square
+[issues-url]: https://github.com/spyreto/react-tree-list/issues
+[license-shield]: https://img.shields.io/github/license/spyreto/react-tree-list?style=flat-square
+[license-url]: https://github.com/spyreto/react-tree-list/blob/main/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/spiridon-dimou-2aa98216b/

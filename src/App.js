@@ -22,13 +22,13 @@ function App() {
         <h1 className="header">My ToDo List</h1>
         <TreeList
           className="tree-list"
-          innerListStyle="inner-list"
-          innerListHeaderStyle="inner-list-header"
-          firstItemStyle="first-item"
-          listItemStyle="list-item"
+          innerListClass="inner-list"
+          innerListHeaderClass="inner-list-header"
+          firstItemClass="first-item"
+          listItemClass="list-item"
           list={data}
           content={listIcon}
-          contentStyle="content-style"
+          contentClass="tree-list-content"
         />
       </div>
     </div>
@@ -49,14 +49,14 @@ function App() {
 //         <h1 className="header">My ToDo List</h1>
 //         <DropDownList
 //           className="tree-list"
-//           innerListStyle="inner-list"
-//           innerListHeaderStyle="inner-list-header"
-//           firstItemStyle="first-item"
-//           listItemStyle="list-item"
+//           innerListClass="inner-list"
+//           innerListHeaderClass="inner-list-header"
+//           firstItemClass="first-item"
+//           listItemClass="list-item"
 //           list={data}
-//           contentStyle="content-style"
-//           iconOpenStyle="open-icon"
-//           iconCloseStyle="close-icon"
+//           contentClass="content-Class"
+//           iconOpenClass="open-icon"
+//           iconCloseClass="close-icon"
 //         />
 //       </div>
 //     </div>

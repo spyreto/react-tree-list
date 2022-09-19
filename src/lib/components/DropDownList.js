@@ -31,16 +31,16 @@ const DropDownList = (props) => {
         level++;
         return (
           <React.Fragment key={getId()}>
-            <li className={props.innerListHeaderStyle} key={node.key}>
+            <li className={props.innerListHeaderClass} key={node.key}>
               {/* Renders the appropriate arrow icon */}
               {listStatus[node.key] ? (
                 <props.closeIcon
-                  className={props.iconOpenStyle}
+                  className={props.iconOpenClass}
                   onClick={() => handleOnClick(node.key)}
                 />
               ) : (
                 <props.openIcon
-                  className={props.iconCloseStyle}
+                  className={props.iconCloseClass}
                   onClick={() => handleOnClick(node.key)}
                 />
               )}
@@ -48,14 +48,14 @@ const DropDownList = (props) => {
                 <props.content
                   content={node.content}
                   key={getId()}
-                  className={props.contenStyle}
+                  className={props.contenClass}
                 />
               ) : (
                 node.content
               )}
             </li>
             {listStatus[node.key] ? (
-              <ul className={props.innerListStyle} key={getId()}>
+              <ul className={props.innerListClass} key={getId()}>
                 {node.children.map((i) => traverse(i, level))}
               </ul>
             ) : (
@@ -64,7 +64,7 @@ const DropDownList = (props) => {
           </React.Fragment>
         );
       } else {
-        let firstItem = level > 0 ? props.listItemStyle : props.firstItemStyle;
+        let firstItem = level > 0 ? props.listItemClass : props.firstItemClass;
         return (
           <li className={firstItem} key={getId()}>
             {props.content ? (
@@ -93,14 +93,12 @@ const DropDownList = (props) => {
 DropDownList.prototype = {
   list: PropTypes.array,
   className: PropTypes.string,
-  innerListHeaderStyle: PropTypes.string,
-  listItemHeaderStyle: PropTypes.string,
-  innerListItemStyle: PropTypes.string,
-  firstItemStyle: PropTypes.string,
-  listItemStyle: PropTypes.string,
-  contentStyle: PropTypes.string,
-  iconOpenStyle: PropTypes.string,
-  iconCloseStyle: PropTypes.string,
+  innerListHeaderClass: PropTypes.string,
+  innerListClass: PropTypes.string,
+  firstItemClass: PropTypes.string,
+  listItemClass: PropTypes.string,
+  iconOpenClass: PropTypes.string,
+  iconCloseClass: PropTypes.string,
   content: PropTypes.elementType.isRequired,
   openIcon: PropTypes.elementType,
   closeIcon: PropTypes.elementType,
@@ -109,14 +107,13 @@ DropDownList.prototype = {
 DropDownList.defaultProps = {
   list: [],
   className: "",
-  innerListHeaderStyle: "",
-  listItemHeader: "",
-  innerListItemStyle: "",
-  listItemStyle: "",
-  lastListItemStyle: "",
-  contentStyle: "",
-  iconOpenStyle: "",
-  iconCloseStyle: "",
+  innerListHeaderClass: "",
+  innerListClass: "",
+  firstItemClass:"",
+  listItemClass: "",
+  lastListItemClass: "",
+  iconOpenClass: "",
+  iconCloseClass: "",
   openIcon: (props) => (
     <FaArrowRight className={props.className} onClick={props.onClick} />
   ),

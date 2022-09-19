@@ -13,24 +13,23 @@ const TreeList = (props) => {
         level++;
         return (
           <React.Fragment key={getId()}>
-            <li className={props.innerListHeaderStyle} key={getId()}>
+            <li className={props.innerListHeaderClass} key={getId()}>
               {props.content ? (
                 <props.content
                   content={node.content}
                   key={getId()}
-                  className={props.contentStyle}
                 />
               ) : (
                 node.content
               )}
             </li>
-            <ul className={props.innerListStyle} key={getId()}>
+            <ul className={props.innerListClass} key={getId()}>
               {node.children.map((i) => traverse(i, level))}
             </ul>
           </React.Fragment>
         );
       } else {
-        let firstItem = level > 0 ? props.listItemStyle : props.firstItemStyle;
+        let firstItem = level > 0 ? props.listItemClass : props.firstItemClass;
         return (
           <li className={firstItem} key={getId()}>
             {props.content ? (
@@ -58,24 +57,22 @@ const TreeList = (props) => {
 TreeList.prototype = {
   list: PropTypes.array,
   className: PropTypes.string,
-  innerListHeaderStyle: PropTypes.string,
-  listItemHeaderStyle: PropTypes.string,
-  innerListItemStyle: PropTypes.string,
-  firstItemStyle: PropTypes.string,
-  listItemStyle: PropTypes.string,
-  contentStyle: PropTypes.string,
+  innerListHeaderClass: PropTypes.string,
+  innerListClass: PropTypes.string,
+  listItemHeaderClass: PropTypes.string,
+  firstItemClass: PropTypes.string,
+  listItemClass: PropTypes.string,
   content: PropTypes.elementType.isRequired,
 };
 
 TreeList.defaultProps = {
   list: [],
   className: "",
-  innerListHeaderStyle: "",
-  listItemHeader: "",
-  innerListItemStyle: "",
-  listItemStyle: "",
-  lastListItemStyle: "",
-  contentStyle: "",
+  innerListHeaderClass: "",
+  innerListClass: "",
+  listItemHeaderClass: "",
+  firstItemClass: "",
+  listItemClass: "",
 };
 
 export default TreeList;
