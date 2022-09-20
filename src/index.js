@@ -1,10 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import TreeList from "./components/TreeList";
+import DropDownList from "./components/DropDownList";
 
-import App from "./App";
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+export { TreeList, DropDownList };
